@@ -102,11 +102,11 @@ public class temp {
                                     tableInfo.setCoverateTableId(daoManager.insertCoverageRatioData(Double.parseDouble(elements[1]), Double.parseDouble(elements[2]), Double.parseDouble(elements[3])));
                                 }
 
-                                if(elements[0].equals("result")){
-                                    if(tableInfo.areAllTablesCreated()){
+                                if (elements[0].equals("result")) {
+                                    if (tableInfo.areAllTablesCreated()) {
                                         stringBuilder.setLength(0);
                                         stringBuilder.append("result/");
-                                        stringBuilder.append(tableInfo.getDoubleById("roe_data", "roe_id","roe", tableInfo.getRoeTableId())).append("/");
+                                        stringBuilder.append(tableInfo.getDoubleById("roe_data", "roe_id", "roe", tableInfo.getRoeTableId())).append("/");
                                         stringBuilder.append(tableInfo.getDoubleById("cb_rate", "cb_rate_id", "real_rate", tableInfo.getCbTableId())).append("/");
                                         stringBuilder.append(tableInfo.getDoubleById("equity_level", "equity_id", "equity_level", tableInfo.getCoverateTableId())).append("/");
                                         stringBuilder.append(tableInfo.getDoubleById("coverate_ratio", "coverate_ratio_id", "coverate_ratio", tableInfo.getCoverateTableId())).append("/");
@@ -114,9 +114,9 @@ public class temp {
                                         stringBuilder.append(tableInfo.getDoubleById("dpoc_data", "dpoc_data_id", "dpoc", tableInfo.getDpocTableId())).append("/");
                                         stringBuilder.append(tableInfo.getStringById("company", "company_name", "company_id", tableInfo.getDpocTableId()));
 
-                                        String respon  = stringBuilder.toString();
+                                        String respon = stringBuilder.toString();
                                         out.println(respon);
-                                    }else{
+                                    } else {
                                         out.println("NonEmpthy");
                                     }
                                 }
