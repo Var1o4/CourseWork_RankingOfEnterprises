@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="324.0" prefWidth="374.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo4.Controllers.RoeController">
+    <children>
+        <TextField fx:id="net_profit" layoutX="4.0" layoutY="80.0" prefHeight="47.0" prefWidth="165.0" promptText="Чистая прибыль" style="-fx-background-color: #00000; -fx-background-radius: 13px; -fx-border-color: orange; -fx-border-width: 3px; -fx-border-radius: 10px;">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </TextField>
+        <Text fx:id="roe" layoutX="73.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="80.0">
+            <font>
+                <Font name="Segoe Print" size="23.0" />
+            </font>
+        </Text>
+        <Button fx:id="solveRoe" layoutX="6.0" layoutY="205.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="362.0" style=" -fx-border-color: orange; -fx-background-radius: 10px; -fx-border-width: 3px; -fx-border-radius: 10px;" text="Вычислить">
+            <font>
+                <Font name="Segoe Print" size="15.0" />
+            </font>
+        </Button>
+        <TextField fx:id="equity" layoutX="5.0" layoutY="137.0" prefHeight="47.0" prefWidth="165.0" promptText="Собственный капитал" style="-fx-background-color: #00000; -fx-background-radius: 13px; -fx-border-color: orange; -fx-border-width: 3px; -fx-border-radius: 10px;">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </TextField>
+        <Text layoutX="12.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Roe=" wrappingWidth="80.0">
+            <font>
+                <Font name="Segoe Print" size="23.0" />
+            </font>
+        </Text>
+        <TextField fx:id="nominal_rate" layoutX="205.0" layoutY="80.0" prefHeight="47.0" prefWidth="165.0" promptText="Номинальная ставка" style="-fx-background-color: #00000; -fx-background-radius: 13px; -fx-border-color: orange; -fx-border-width: 3px; -fx-border-radius: 10px;">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </TextField>
+        <Text fx:id="real_rate" layoutX="274.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="80.0">
+            <font>
+                <Font name="Segoe Print" size="23.0" />
+            </font>
+        </Text>
+        <TextField fx:id="inflation_rate" layoutX="206.0" layoutY="137.0" prefHeight="47.0" prefWidth="165.0" promptText="Ожидаемая инфляция" style="-fx-background-color: #00000; -fx-background-radius: 13px; -fx-border-color: orange; -fx-border-width: 3px; -fx-border-radius: 10px;">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </TextField>
+        <Text layoutX="213.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="СB=" wrappingWidth="80.0">
+            <font>
+                <Font name="Segoe Print" size="23.0" />
+            </font>
+        </Text>
+        <TextField fx:id="companyName" layoutX="101.0" layoutY="14.0" prefHeight="47.0" prefWidth="173.0" promptText="Введите комапнию" style="-fx-border-color: orange; -fx-border-radius: 10px; -fx-border-width: 3px;">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+        </TextField>
+        <Text fx:id="companyDanger" fill="RED" layoutX="87.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-opacity: 0;" text="Введите название компании" wrappingWidth="228.13671875">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </Text>
+        <Text fx:id="companyDanger1" fill="RED" layoutX="73.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-opacity: 0;" text="Неккоректно введены числа" wrappingWidth="228.13671875">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </Text>
+    </children>
+</AnchorPane>
