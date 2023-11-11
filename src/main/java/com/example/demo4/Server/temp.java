@@ -13,6 +13,7 @@ import java.net.SocketException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Savepoint;
 
 public class temp {
     private static int portNumber = 12345; // Порт сервера
@@ -43,41 +44,91 @@ public class temp {
                         TableInfo tableInfo = new TableInfo();
                         DataDAOManager daoManager = new DataDAOManager();
 
+
+                        Savepoint savepoint = null;
+                        connection.setAutoCommit(false);
+                        savepoint = connection.setSavepoint();
+                        StringBuilder stringBuilder = new StringBuilder();
+
                         try {
                             while ((inputLine = in.readLine()) != null) {
                                 System.out.println("Received message from client: " + inputLine);
                                 String response = "Server received: " + inputLine;
-                                connection.setAutoCommit(false);
+
                                 String[] elements = inputLine.split("/");
 
                                 if (elements[0].equals("roe_create")) {
                                     if (tableInfo.isRoeTableCreated()) {
-                                        System.out.println("Таблица roe создана");
-
-                                        tableInfo.setRoeTableId(daoManager.insertRoeData(Double.parseDouble(elements[1]), Double.parseDouble(elements[2]), Double.parseDouble(elements[3])));
-
+                                        daoManager.deleteRoeDataById(tableInfo.getRoeTableId());
                                     }
+                                    tableInfo.setRoeTableId(daoManager.insertRoeData(Double.parseDouble(elements[1]), Double.parseDouble(elements[2]), Double.parseDouble(elements[3])));
+                                    System.out.println("Таблица roe создана");
                                 } else if (elements[0].equals("cb_create")) {
+
+                                    if (tableInfo.isCbTableCreated()) {
+                                        daoManager.deleteCbDataById(tableInfo.getCbTableId());
+                                    }
                                     System.out.println("Таблица cb создана");
                                     tableInfo.setCbTableId(daoManager.insertCBData(Double.parseDouble(elements[1]), Double.parseDouble(elements[2]), Double.parseDouble(elements[3])));
                                 } else if (elements[0].equals("company_create")) {
+                                    if (tableInfo.isCompanyTableCreated()) {
+                                        daoManager.deleteCompanyById(tableInfo.getCompanyTableId());
+                                    }
                                     System.out.println("Таблица company создана");
                                     tableInfo.setCompanyTableId(daoManager.insertCompany(elements[1], "", Integer.parseInt(elements[2])));
                                 } else if (elements[0].equals("dpo_create")) {
+                                    if (tableInfo.isDpoTableCreated()) {
+                                        daoManager.deleteDpoDataById(tableInfo.getDpoTableId());
+                                    }
                                     System.out.println("Таблица dpo создана");
                                     tableInfo.setDpoTableId(daoManager.insertDpoData(Double.parseDouble(elements[1]), Double.parseDouble(elements[2]), Double.parseDouble(elements[2]), Double.parseDouble(elements[3])));
                                 } else if (elements[0].equals("dpoc_create")) {
+                                    if (tableInfo.isDpocTableCreated()) {
+                                        daoManager.deleteDpocDataById(tableInfo.getDpocTableId());
+                                    }
                                     System.out.println("Таблица dpoc создана");
                                     tableInfo.setDpocTableId(daoManager.insertDpocData(Double.parseDouble(elements[1]), Double.parseDouble(elements[2]), Double.parseDouble(elements[3])));
                                 } else if (elements[0].equals("equity_create")) {
+                                    if (tableInfo.isEquityTableCreated()) {
+                                        daoManager.deleteEquityById(tableInfo.getEquityTableId());
+                                    }
                                     System.out.println("Таблица roe создана");
                                     tableInfo.setEquityTableId(daoManager.insertEquity(Double.parseDouble(elements[1]), Double.parseDouble(elements[2]), Double.parseDouble(elements[3])));
                                 } else if (elements[0].equals("coverate_create")) {
+                                    if (tableInfo.isCoverateTableCreated()) {
+                                        daoManager.deleteCoverageRatioDataById(tableInfo.getCoverateTableId());
+                                    }
                                     System.out.println(" клиент вышел");
                                     tableInfo.setCoverateTableId(daoManager.insertCoverageRatioData(Double.parseDouble(elements[1]), Double.parseDouble(elements[2]), Double.parseDouble(elements[3])));
                                 }
 
+                                if(elements[0].equals("result")){
+                                    if(tableInfo.areAllTablesCreated()){
+                                        stringBuilder.setLength(0);
+                                        stringBuilder.append("result/");
+                                        stringBuilder.append(tableInfo.getDoubleById("roe_data", "roe_id","roe", tableInfo.getRoeTableId())).append("/");
+                                        stringBuilder.append(tableInfo.getDoubleById("cb_rate", "cb_rate_id", "real_rate", tableInfo.getCbTableId())).append("/");
+                                        stringBuilder.append(tableInfo.getDoubleById("equity_level", "equity_id", "equity_level", tableInfo.getCoverateTableId())).append("/");
+                                        stringBuilder.append(tableInfo.getDoubleById("coverate_ratio", "coverate_ratio_id", "coverate_ratio", tableInfo.getCoverateTableId())).append("/");
+                                        stringBuilder.append(tableInfo.getDoubleById("dpo_data", "dpo_data_id", "dpo", tableInfo.getDpoTableId())).append("/");
+                                        stringBuilder.append(tableInfo.getDoubleById("dpoc_data", "dpoc_data_id", "dpoc", tableInfo.getDpocTableId())).append("/");
+                                        stringBuilder.append(tableInfo.getStringById("company", "company_name", "company_id", tableInfo.getDpocTableId()));
+
+                                        String respon  = stringBuilder.toString();
+                                        out.println(respon);
+                                    }else{
+                                        out.println("NonEmpthy");
+                                    }
+                                }
+
+                                if (tableInfo.areAllTablesCreated()) {
+                                    tableInfo.createSystemIndicator();
+                                }
+
                                 if ("exit".equals(inputLine)) {
+                                    if (!tableInfo.areAllTablesCreated()) {
+                                        connection.rollback(savepoint);
+                                    }
                                     System.out.println(" клиент вышел");
                                 }
                                 connection.commit();

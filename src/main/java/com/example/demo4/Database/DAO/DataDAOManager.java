@@ -45,4 +45,33 @@ public class DataDAOManager {
     }
 
 
+    public void deleteRoeDataById(int roeDataId) throws SQLException {
+        roeDataDAO.deleteRoeDataById(roeDataId);
+    }
+
+    public void deleteCbDataById(int cbDataId) throws SQLException {
+        cbDataDAO.deleteCbRateById(cbDataId);
+    }
+
+    public void deleteCoverageRatioDataById(int coverageRatioDataId) throws SQLException {
+        coverageRatioDataDAO.deleteCoverageRatioById(coverageRatioDataId);
+    }
+
+    public void deleteEquityById(int equityId) throws SQLException {
+        equityDataDAO.deleteEquityLevelById(equityId);
+    }
+
+    public void deleteDpoDataById(int dpoDataId) throws SQLException {
+        dpoDataDAO.deleteDpoDataById(dpoDataId);
+    }
+
+    public void deleteDpocDataById(int dpocDataId) throws SQLException {
+        dpocDataDAO.deleteDpocDataById(dpocDataId);
+    }
+
+    public void deleteCompanyById(int companyId) throws SQLException {
+        companyDAO.deleteCompanyById(companyId);
+    }
+
+
 }

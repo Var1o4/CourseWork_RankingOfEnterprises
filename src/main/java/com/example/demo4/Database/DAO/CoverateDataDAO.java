@@ -39,4 +39,24 @@ public class CoverateDataDAO {
         return 0;
     }
 
+    public void deleteCoverageRatioById(int coverageRatioId) throws SQLException {
+        JDBС.connect();
+
+        try {
+            String deleteSql = "DELETE FROM coverate_ratio WHERE coverate_ratio_id = ?";
+            PreparedStatement deleteStatement = JDBС.connection.prepareStatement(deleteSql);
+            deleteStatement.setInt(1, coverageRatioId);
+
+            deleteStatement.executeUpdate();
+
+            deleteStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        JDBС.close();
+    }
+
+
+
 }

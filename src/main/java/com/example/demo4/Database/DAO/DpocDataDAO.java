@@ -38,4 +38,22 @@ public class DpocDataDAO {
         JDBС.close();
         return 0;
     }
+
+    public void deleteDpocDataById(int dpocDataId) throws SQLException {
+        JDBС.connect();
+
+        try {
+            String deleteSql = "DELETE FROM dpoc_data WHERE dpoc_data_id = ?";
+            PreparedStatement deleteStatement = JDBС.connection.prepareStatement(deleteSql);
+            deleteStatement.setInt(1, dpocDataId);
+
+            deleteStatement.executeUpdate();
+
+            deleteStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        JDBС.close();
+    }
 }
