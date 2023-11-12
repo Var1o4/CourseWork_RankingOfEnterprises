@@ -1,5 +1,6 @@
 package com.example.demo4.Database;
 
+import java.lang.reflect.GenericArrayType;
 import java.sql.*;
 import java.time.LocalDate;
 
@@ -17,12 +18,35 @@ public class TableInfo {
     private int dpocTableId;
     private int companyTableId;
 
+    private int indificators_id = -1;
+
+    private boolean created = false;
+
     // Геттеры и сеттеры для каждого поля
 
 
     public void setRoeTableId(int roeTableId) {
         this.roeTableId = roeTableId;
     }
+
+    public void setCreated(boolean created) {
+        this.created = created;
+    }
+
+
+    public void setIndificators_id(int indificators_id) {
+        this.indificators_id = indificators_id;
+    }
+
+    public int getIndificators_id() {
+        return indificators_id;
+    }
+
+
+    public boolean getCreated() {
+        return created;
+    }
+
 
     public void setCbTableId(int cbTableId) {
         this.cbTableId = cbTableId;
@@ -111,12 +135,14 @@ public class TableInfo {
     }
 
 
-    public void createSystemIndicator() throws SQLException {
+    public int createSystemIndicator() throws SQLException {
         JDBС.connect();
         String query = "INSERT INTO system_indicators (roe_data_id, cb_rate_id, equity_level_id, coverate_ratio_id, " +
                 "dpo_data_id, dpoc_data_id, year, company_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (PreparedStatement statement = JDBС.connection.prepareStatement(query)) {
+        int generatedId = -1; // Инициализируем с отрицательным значением, чтобы указать на ошибку
+
+        try (PreparedStatement statement = JDBС.connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setInt(1, roeTableId);
             statement.setInt(2, cbTableId);
             statement.setInt(3, equityTableId);
@@ -129,14 +155,21 @@ public class TableInfo {
             statement.setInt(8, companyTableId);
 
             int rowsAffected = statement.executeUpdate();
+            created = true;
             if (rowsAffected > 0) {
-                System.out.println("System indicator created successfully.");
+                ResultSet generatedKeys = statement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    generatedId = generatedKeys.getInt(1);
+                    System.out.println("System indicator created successfully. Generated ID: " + generatedId);
+                }
             } else {
                 System.out.println("Failed to create system indicator.");
             }
         } finally {
             JDBС.close();
         }
+
+        return generatedId;
     }
 
     public double getDoubleById(String tableName,String keyName, String columnName,  int keyValue) throws SQLException {
@@ -187,4 +220,23 @@ public class TableInfo {
         JDBС.close();
         return roeValue;
     }
+
+    public void deleteIndeficatorsDataById(int dataId) throws SQLException {
+        JDBС.connect();
+
+        try {
+            String deleteSql = "DELETE FROM system_indicators WHERE indicator_id = ?";
+            PreparedStatement deleteStatement = JDBС.connection.prepareStatement(deleteSql);
+            deleteStatement.setInt(1, dataId);
+
+            deleteStatement.executeUpdate();
+
+            deleteStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        JDBС.close();
+    }
+
 }

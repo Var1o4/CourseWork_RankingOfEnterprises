@@ -64,6 +64,11 @@ public class CompanyDataDAO {
         try {
             String updateSql = "UPDATE company SET result = ? WHERE company_id = ?";
             PreparedStatement updateStatement = JDBС.connection.prepareStatement(updateSql);
+            int maxLength = 250; // Максимальная длина столбца 'result'
+
+            if (newResult.length() > maxLength) {
+                newResult = newResult.substring(0, maxLength);
+            }
             updateStatement.setString(1, newResult);
             updateStatement.setInt(2, companyId);
 

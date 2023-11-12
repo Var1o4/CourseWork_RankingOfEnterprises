@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import com.example.demo4.Database.DAO.CompanyDataDAO;
 import com.example.demo4.User.SolveResult;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -89,7 +91,7 @@ public class WorkUserController extends BaseController {
     }
 
     @FXML
-    void result(MouseEvent event) throws IOException {
+    void result(MouseEvent event) throws IOException, SQLException {
         SolveResult solveResult = new SolveResult();
         PrintWriter out = new PrintWriter(getSocket().getOutputStream(), true);
         BufferedReader in = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
@@ -120,14 +122,15 @@ public class WorkUserController extends BaseController {
                 solveResult.dpoSolve(dpo);
                 solveResult.roeSolve(roe, cb);
                 res = solveResult.resultShow();
-
+                CompanyDataDAO companyDataDAO = new CompanyDataDAO();
+                companyDataDAO.updateCompanyResult(Integer.parseInt(elements[8]), res);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo4/" + "result.fxml"));
 
                 try {
                     Parent root = loader.load();
                     ResultController resultController = loader.getController();
                     resultController.initial(roe, coverate, equity, dpo, dpoc, cb, company, res);
-
+                    resultController.setSocket(getSocket());
                     bp.setCenter(root);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -165,7 +168,16 @@ public class WorkUserController extends BaseController {
 
     @FXML
     void show_company(MouseEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo4/showCompanies.fxml"));
 
+        try {
+            Parent root = loader.load();
+            TableController tableController = loader.getController();
+            tableController.setUserId(getUserId());
+            bp.setCenter(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

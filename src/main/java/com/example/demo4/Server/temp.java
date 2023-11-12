@@ -103,7 +103,10 @@ public class temp {
 
                                 if (elements[0].equals("result")) {
                                     if (tableInfo.areAllTablesCreated()) {
-                                        tableInfo.createSystemIndicator();
+                                        if(tableInfo.getCreated()){
+                                            tableInfo.deleteIndeficatorsDataById(tableInfo.getIndificators_id());
+                                        }
+                                        tableInfo.setIndificators_id(tableInfo.createSystemIndicator());
                                         stringBuilder.setLength(0);
                                         stringBuilder.append("result/");
                                         stringBuilder.append(tableInfo.getDoubleById("roe_data", "roe_id", "roe", tableInfo.getRoeTableId())).append("/");
@@ -112,7 +115,8 @@ public class temp {
                                         stringBuilder.append(tableInfo.getDoubleById("coverate_ratio", "coverate_ratio_id", "coverate_ratio", tableInfo.getCoverateTableId())).append("/");
                                         stringBuilder.append(tableInfo.getDoubleById("dpo_data", "dpo_data_id", "dpo", tableInfo.getDpoTableId())).append("/");
                                         stringBuilder.append(tableInfo.getDoubleById("dpoc_data", "dpoc_data_id", "dpoc", tableInfo.getDpocTableId())).append("/");
-                                        stringBuilder.append(tableInfo.getStringById("company", "company_name", "company_id", tableInfo.getDpocTableId()));
+                                        stringBuilder.append(tableInfo.getStringById("company", "company_name", "company_id", tableInfo.getDpocTableId())).append("/");
+                                        stringBuilder.append(tableInfo.getCompanyTableId());
 
                                         String respon = stringBuilder.toString();
                                         System.out.println(respon);
@@ -121,6 +125,12 @@ public class temp {
                                         out.println("NonEmpthy");
                                         System.out.println("nonEmpphty");
                                     }
+                                }
+
+
+
+                                if (elements[0].equals("new_company_write")) {
+                                    tableInfo=null;
                                 }
 
 
