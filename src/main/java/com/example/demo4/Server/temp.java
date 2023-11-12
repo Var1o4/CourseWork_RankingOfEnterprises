@@ -39,7 +39,6 @@ public class temp {
                         Connection connection = DriverManager.getConnection(url, username, password);
                         out = new PrintWriter(clientSocket.getOutputStream(), true);
                         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                        out.println("potok1");
                         String inputLine;
                         TableInfo tableInfo = new TableInfo();
                         DataDAOManager daoManager = new DataDAOManager();
@@ -104,6 +103,7 @@ public class temp {
 
                                 if (elements[0].equals("result")) {
                                     if (tableInfo.areAllTablesCreated()) {
+                                        tableInfo.createSystemIndicator();
                                         stringBuilder.setLength(0);
                                         stringBuilder.append("result/");
                                         stringBuilder.append(tableInfo.getDoubleById("roe_data", "roe_id", "roe", tableInfo.getRoeTableId())).append("/");
@@ -115,15 +115,15 @@ public class temp {
                                         stringBuilder.append(tableInfo.getStringById("company", "company_name", "company_id", tableInfo.getDpocTableId()));
 
                                         String respon = stringBuilder.toString();
+                                        System.out.println(respon);
                                         out.println(respon);
                                     } else {
                                         out.println("NonEmpthy");
+                                        System.out.println("nonEmpphty");
                                     }
                                 }
 
-                                if (tableInfo.areAllTablesCreated()) {
-                                    tableInfo.createSystemIndicator();
-                                }
+
 
                                 if ("exit".equals(inputLine)) {
                                     if (!tableInfo.areAllTablesCreated()) {
@@ -133,8 +133,6 @@ public class temp {
                                 }
                                 connection.commit();
                                 // Отправляем ответ клиенту
-                                out.println(response);
-                                System.out.println("Sent response to client: " + response);
                             }
                         } catch (SocketException e) {
                             System.out.println("Client disconnected unexpectedly: " + e.getMessage());

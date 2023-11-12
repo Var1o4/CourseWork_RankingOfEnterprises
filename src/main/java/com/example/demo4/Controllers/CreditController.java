@@ -14,6 +14,8 @@ import javafx.scene.text.Text;
 
 public class CreditController extends BaseController{
 
+
+
     @FXML
     private ResourceBundle resources;
 

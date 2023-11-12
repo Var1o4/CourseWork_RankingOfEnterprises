@@ -79,7 +79,7 @@ public class ClientApp extends Application implements RegistrationListener {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             controller.setSocket(socket);
 
-            startServerListener();
+//            startServerListener();
 
 
         } catch (IOException e) {
