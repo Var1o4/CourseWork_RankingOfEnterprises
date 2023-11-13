@@ -88,4 +88,36 @@ public class CompanyDataDAO {
     }
 
 
+    public int findCompanyResult(String companyName) throws SQLException {
+        JDBС.connect();
+        int companyId = -1; // Идентификатор компании
+
+        try {
+            String selectSql = "SELECT company_id, result FROM company WHERE company_name = ?";
+            PreparedStatement selectStatement = JDBС.connection.prepareStatement(selectSql);
+            selectStatement.setString(1, companyName);
+            ResultSet resultSet = selectStatement.executeQuery();
+
+            if (resultSet.next()) {
+                companyId = resultSet.getInt("company_id");
+                String result = resultSet.getString("result");
+
+            } else {
+                System.out.println("Company not found.");
+            }
+
+            resultSet.close();
+            selectStatement.close(git commit -am);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        JDBС.close();
+
+        return companyId;
+    }
+
+
+
+
 }

@@ -19,11 +19,11 @@ public class SolveResult {
         }
     }
     public void equitySolve(double equity){
-        if(equity>70){
+        if(equity>0.70){
             totalScore+=5;
-        }else if(70>=equity && equity>60){
+        }else if(0.70>=equity && equity>0.60){
             totalScore+=3;
-        }else if(60>=equity && equity>50){
+        }else if(0.60>=equity && equity>0.50){
             totalScore+=1;
         }
     }
@@ -67,6 +67,72 @@ public class SolveResult {
             return "Баллов:"+ totalScore+". " +groupD;
         }
 
+    }
+
+    public String roeScoreSolve(double roe, double cb) {
+        int score = 0;
+        double del = roe / cb;
+        if (del > ((1.0 / 3.0) * cb)) {
+            score += 5;
+        } else if (((1.0 / 3.0) * cb) >= del && del > ((1.0 / 4.0) * cb)) {
+            score += 3;
+        } else if (((1.0 / 4.0) * cb) >= del && del > 0) {
+            score += 1;
+        }
+
+        return "Баллы: " + score;
+    }
+
+    public String equityScoreSolve(double equity) {
+        int score = 0;
+        if (equity > 0.70) {
+            score += 5;
+        } else if (0.70 >= equity && equity > 0.60) {
+            score += 3;
+        } else if (0.60 >= equity && equity > 0.50) {
+            score += 1;
+        }
+
+        return "Баллы: " + score;
+    }
+
+    public String coverateScoreSolve(double equity) {
+        int score = 0;
+        if (equity > 1.1) {
+            score += 5;
+        } else if (1.1 >= equity && equity > 1.0) {
+            score += 3;
+        } else if (1.0 >= equity && equity > 0.8) {
+            score += 1;
+        }
+
+        return "Баллы: " + score;
+    }
+
+    public String dpoScoreSolve(double equity) {
+        int score = 0;
+        if (equity < 60) {
+            score += 5;
+        } else if (60 <= equity && equity < 90) {
+            score += 3;
+        } else if (90 <= equity && equity < 180) {
+            score += 1;
+        }
+
+        return "Баллы: " + score;
+    }
+
+    public String dpocScoreSolve(double equity) {
+        int score = 0;
+        if (equity < 30) {
+            score += 5;
+        } else if (30 <= equity && equity < 60) {
+            score += 3;
+        } else if (60 <= equity && equity < 90) {
+            score += 1;
+        }
+
+        return "Баллы: " + score;
     }
 
 }

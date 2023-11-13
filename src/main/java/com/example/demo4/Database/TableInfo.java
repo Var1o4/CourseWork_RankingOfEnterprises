@@ -239,4 +239,32 @@ public class TableInfo {
         JDBС.close();
     }
 
+    public static TableInfo createTableInfoByCompanyId(int companyId) throws SQLException {
+        JDBС.connect();
+        String query = "SELECT * FROM system_indicators WHERE company_id = ?";
+        TableInfo tableInfo = null;
+
+        try (PreparedStatement statement = JDBС.connection.prepareStatement(query)) {
+            statement.setInt(1, companyId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                tableInfo = new TableInfo();
+                tableInfo.setRoeTableId(resultSet.getInt("roe_data_id"));
+                tableInfo.setCbTableId(resultSet.getInt("cb_rate_id"));
+                tableInfo.setEquityTableId(resultSet.getInt("equity_level_id"));
+                tableInfo.setCoverateTableId(resultSet.getInt("coverate_ratio_id"));
+                tableInfo.setDpoTableId(resultSet.getInt("dpo_data_id"));
+                tableInfo.setDpocTableId(resultSet.getInt("dpoc_data_id"));
+                tableInfo.setCompanyTableId(resultSet.getInt("company_id"));
+                // Set other properties if necessary
+            }
+
+            resultSet.close();
+        } finally {
+            JDBС.close();
+        }
+
+        return tableInfo;
+    }
 }

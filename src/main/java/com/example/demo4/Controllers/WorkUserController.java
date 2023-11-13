@@ -87,7 +87,18 @@ public class WorkUserController extends BaseController {
 
     @FXML
     void documents(MouseEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo4/" + "reports.fxml"));
 
+        try {
+            Parent root = loader.load();
+            ReportsController reportsController = loader.getController();
+            reportsController.setUserId(getUserId());
+            reportsController.setSocket(getSocket());
+
+            bp.setCenter(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

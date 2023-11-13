@@ -71,7 +71,7 @@ public class CreditController extends BaseController{
 
                     dpo.setText(formattedResult);
 
-                    double dpoc_1= (net_prod_1+365)/amount_prod_1 ;
+                    double dpoc_1= (net_prod_1*365)/amount_prod_1 ;
 
                     DecimalFormat decimalFormat_cb = new DecimalFormat("#.###");
                     String formattedResult_cb = decimalFormat.format(dpoc_1);
