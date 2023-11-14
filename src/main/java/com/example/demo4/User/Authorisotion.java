@@ -10,10 +10,18 @@ import com.example.demo4.Database.JDBС;
 public class Authorisotion {
 
 
-    public static void registerUser(String login, String password, String role, String profileName) throws SQLException {
+    public static void registerUser(String login, String password, String profileName, String user) throws SQLException {
         JDBС.connect();
 
         try {
+
+            String role;
+            if (user.equals("user"))
+            {
+                role = "user";
+            }else{
+                role ="admin";
+            }
             // Проверка на существование пользователя с заданным логином
             if (isUserExists(login)) {
                 System.out.println("Пользователь с логином '" + login + "' уже существует.");
@@ -68,7 +76,7 @@ public class Authorisotion {
         try {
             JDBС.connect();  // Установить соединение с базой данных
 
-            String query = "SELECT user_id, password FROM user WHERE login = ?";
+            String query = "SELECT user_id, password, role FROM user WHERE login = ?"; // Добавить role в запрос
             PreparedStatement statement = JDBС.connection.prepareStatement(query);
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
@@ -76,16 +84,18 @@ public class Authorisotion {
             if (resultSet.next()) {
                 int userId = resultSet.getInt("user_id");
                 String hashedPassword = resultSet.getString("password");
+                String role = resultSet.getString("role"); // Получить роль из результата
                 boolean isAuthenticated = BCrypt.checkpw(password, hashedPassword);
 
                 JDBС.close();
 
-                return new AuthResult(userId, isAuthenticated);
+                return new AuthResult(userId, isAuthenticated, role);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return new AuthResult(-1, false);
+        return new AuthResult(-1, false, "user");
     }
+
 }

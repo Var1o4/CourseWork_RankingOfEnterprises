@@ -65,22 +65,41 @@ public class Controller extends BaseController {
                 }
                 updateUserId(userId);
 
+                if(authResult.getRole().equals("user")){
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo4/work_user_module.fxml"));
+                        Parent root = fxmlLoader.load();
+                        Scene newScene = new Scene(root);
 
-                try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo4/work_user_module.fxml"));
-                    Parent root = fxmlLoader.load();
-                    Scene newScene = new Scene(root);
+                        WorkUserController workUserController = fxmlLoader.getController();
+                        workUserController.setUserId(userId);
+                        workUserController.setSocket(getSocket());
+                        workUserController.setRole(authResult.getRole());
+                        workUserController.initialize();
 
-                    WorkUserController workUserController = fxmlLoader.getController();
-                    workUserController.setUserId(userId);
-                    workUserController.setIdStorage(getIdStorage());
-                    workUserController.setSocket(getSocket());
+                        Stage primaryStage = (Stage) singUpButton.getScene().getWindow();
+                        primaryStage.setScene(newScene);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }else if(authResult.getRole().equals("admin") || authResult.getRole().equals("test")){
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo4/adminModule.fxml"));
+                        Parent root = fxmlLoader.load();
+                        Scene newScene = new Scene(root);
 
-                    Stage primaryStage = (Stage) singUpButton.getScene().getWindow();
-                    primaryStage.setScene(newScene);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                        AdminMenuChoise adminMenuChoise = fxmlLoader.getController();
+                        adminMenuChoise.setUserId(getUserId());;
+                        adminMenuChoise.setSocket(getSocket());
+                        adminMenuChoise.setRole(authResult.getRole());
+
+                        Stage primaryStage = (Stage) singUpButton.getScene().getWindow();
+                        primaryStage.setScene(newScene);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
+
                 // Пользователь аутентифицирован, выполняйте необходимые действия
             } else {
                 // Пользователь не найден, изменить прозрачность элемента uncorrectAuthorisation
@@ -97,6 +116,7 @@ public class Controller extends BaseController {
                 Scene newScene = new Scene(root);
 
                 Stage primaryStage = (Stage) singUpButton.getScene().getWindow();
+
                 primaryStage.setScene(newScene);
             } catch (IOException e) {
                 throw new RuntimeException(e);

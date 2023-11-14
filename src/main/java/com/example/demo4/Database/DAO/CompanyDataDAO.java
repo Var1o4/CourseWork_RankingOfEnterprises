@@ -107,7 +107,7 @@ public class CompanyDataDAO {
             }
 
             resultSet.close();
-            selectStatement.close(git commit -am);
+            selectStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

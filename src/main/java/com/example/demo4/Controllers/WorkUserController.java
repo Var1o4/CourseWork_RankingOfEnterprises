@@ -12,8 +12,10 @@ import com.example.demo4.Database.DAO.CompanyDataDAO;
 import com.example.demo4.User.SolveResult;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -42,6 +44,39 @@ public class WorkUserController extends BaseController {
     @FXML
     private BorderPane bp;
 
+    @FXML
+    void bacccccc(MouseEvent event) {
+        if (getRole().equals("user")) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo4/authorisation.fxml"));
+            try {
+                Parent root = fxmlLoader.load();
+                Scene newScene = new Scene(root);
+
+                Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                primaryStage.setScene(newScene);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        } else {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo4/adminModule.fxml"));
+                Parent root = fxmlLoader.load();
+                Scene newScene = new Scene(root);
+
+                AdminMenuChoise adminMenuChoise = fxmlLoader.getController();
+                adminMenuChoise.setUserId(getUserId());
+                adminMenuChoise.setSocket(getSocket());
+                adminMenuChoise.setRole(getRole());
+
+                Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                primaryStage.setScene(newScene);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
 
     @FXML
     void capital(MouseEvent event) {
@@ -53,7 +88,6 @@ public class WorkUserController extends BaseController {
             Parent root = loader.load();
             EquityController equityController = loader.getController();
             equityController.setUserId(getUserId());
-            equityController.setIdStorage(getIdStorage());
             equityController.setSocket(getSocket());
 
 
@@ -74,7 +108,6 @@ public class WorkUserController extends BaseController {
             Parent root = loader.load();
             CreditController creditController = loader.getController();
             creditController.setUserId(getUserId());
-            creditController.setIdStorage(getIdStorage());
             creditController.setSocket(getSocket());
 
 
@@ -119,7 +152,7 @@ public class WorkUserController extends BaseController {
             if (inputLine.equals("NonEmpthy")) {
 
 
-            } else if(elements[0].equals("result")) {
+            } else if (elements[0].equals("result")) {
                 roe = Double.parseDouble(elements[1]);
                 cb = Double.parseDouble(elements[2]);
                 equity = Double.parseDouble(elements[3]);
@@ -153,9 +186,6 @@ public class WorkUserController extends BaseController {
         }
 
 
-
-
-
     }
 
     @FXML
@@ -167,7 +197,6 @@ public class WorkUserController extends BaseController {
             Parent root = loader.load();
             RoeController roeController = loader.getController();
             roeController.setUserId(getUserId());
-            roeController.setIdStorage(getIdStorage());
             roeController.setSocket(getSocket());
 
             bp.setCenter(root);

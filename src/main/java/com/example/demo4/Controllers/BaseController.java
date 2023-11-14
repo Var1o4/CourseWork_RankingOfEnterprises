@@ -5,6 +5,7 @@ import com.example.demo4.Database.IdStorage;
 import java.net.Socket;
 
 public class BaseController {
+    private String role;
     private int userId;
 
     private Socket socket;
@@ -36,8 +37,13 @@ public class BaseController {
         this.idStorage = idStorage;
     }
 
+    public String getRole() {
+        return role;
+    }
 
-
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public void setUserId(int userId) {
         this.userId = userId;

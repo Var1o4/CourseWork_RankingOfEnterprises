@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="700.0" style="-fx-background-color: #1C1C1C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo4.Controllers.RegController">
     <children>
@@ -41,6 +42,8 @@
                   <Font size="18.0" />
                </font>
             </PasswordField>
+            <Text fx:id="passwordDanger" fill="RED" layoutX="262.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-opacity: 0;" text="Введите правильно пароль" wrappingWidth="248.13671875" />
+            <Text fx:id="fieldDanger" fill="RED" layoutX="263.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-opacity: 0;" text="Не все поля заполнены" wrappingWidth="248.13671875" />
             </children>
         </AnchorPane>
         <Label layoutX="187.0" layoutY="3.0" prefHeight="82.0" prefWidth="360.0" text="InvestCHECK" textFill="WHITE">
