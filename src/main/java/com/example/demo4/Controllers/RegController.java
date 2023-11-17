@@ -83,7 +83,8 @@ public class RegController extends BaseController{
                 try {
                     Parent root = fxmlLoader.load();
                     Scene newScene = new Scene(root);
-
+                    Controller controller = fxmlLoader.getController();
+                    controller.setSocket(getSocket());
                     Stage primaryStage = (Stage) registerButton.getScene().getWindow();
 
                     primaryStage.setScene(newScene);

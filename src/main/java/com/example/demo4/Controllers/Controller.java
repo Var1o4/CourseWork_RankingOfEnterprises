@@ -115,6 +115,9 @@ public class Controller extends BaseController {
                 Parent root = fxmlLoader.load();
                 Scene newScene = new Scene(root);
 
+                RegController regController = fxmlLoader.getController();
+                regController.setSocket(getSocket());
+
                 Stage primaryStage = (Stage) singUpButton.getScene().getWindow();
 
                 primaryStage.setScene(newScene);

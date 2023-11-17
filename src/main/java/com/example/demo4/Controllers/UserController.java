@@ -154,12 +154,34 @@ public class UserController extends BaseController{
                 return;
             }
 
+            // Удаление связанных таблиц
+
+            // Удаление из таблицы `system_indicators`
+            String deleteSystemIndicatorsQuery = "DELETE FROM system_indicators WHERE company_id IN (SELECT company_id FROM company WHERE user_id IN (SELECT user_id FROM user WHERE login = ?))";
+            PreparedStatement deleteSystemIndicatorsStatement = JDBС.connection.prepareStatement(deleteSystemIndicatorsQuery);
+            deleteSystemIndicatorsStatement.setString(1, login);
+            deleteSystemIndicatorsStatement.executeUpdate();
+            deleteSystemIndicatorsStatement.close();
+
+            // Удаление из таблицы `company`
+            String deleteCompanyQuery = "DELETE FROM company WHERE user_id IN (SELECT user_id FROM user WHERE login = ?)";
+            PreparedStatement deleteCompanyStatement = JDBС.connection.prepareStatement(deleteCompanyQuery);
+            deleteCompanyStatement.setString(1, login);
+            deleteCompanyStatement.executeUpdate();
+            deleteCompanyStatement.close();
+
+            // Удаление из таблицы `profile`
+            String deleteProfileQuery = "DELETE FROM profile WHERE user_id IN (SELECT user_id FROM user WHERE login = ?)";
+            PreparedStatement deleteProfileStatement = JDBС.connection.prepareStatement(deleteProfileQuery);
+            deleteProfileStatement.setString(1, login);
+            deleteProfileStatement.executeUpdate();
+            deleteProfileStatement.close();
+
             statement.close();
         } finally {
             JDBС.close();
         }
     }
-
     @FXML
     void initialize() {
         show_x.setOnAction(event -> {
