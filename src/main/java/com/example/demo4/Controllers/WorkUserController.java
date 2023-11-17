@@ -45,6 +45,15 @@ public class WorkUserController extends BaseController {
     private BorderPane bp;
 
     @FXML
+    private Button jap;
+
+    @FXML
+    private Button japa;
+
+    @FXML
+    private Button japan;
+
+    @FXML
     void bacccccc(MouseEvent event) {
         if (getRole().equals("user")) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo4/authorisation.fxml"));
@@ -89,7 +98,8 @@ public class WorkUserController extends BaseController {
             EquityController equityController = loader.getController();
             equityController.setUserId(getUserId());
             equityController.setSocket(getSocket());
-
+            japa.setVisible(true);
+            japa.setDisable(false);
 
             bp.setCenter(root);
         } catch (IOException e) {
@@ -109,8 +119,8 @@ public class WorkUserController extends BaseController {
             CreditController creditController = loader.getController();
             creditController.setUserId(getUserId());
             creditController.setSocket(getSocket());
-
-
+            japan.setVisible(true);
+            japan.setDisable(false);
             bp.setCenter(root);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -198,7 +208,8 @@ public class WorkUserController extends BaseController {
             RoeController roeController = loader.getController();
             roeController.setUserId(getUserId());
             roeController.setSocket(getSocket());
-
+            jap.setVisible(true);
+            jap.setDisable(false);
             bp.setCenter(root);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -222,6 +233,15 @@ public class WorkUserController extends BaseController {
 
     @FXML
     void initialize() {
+
+        jap.setVisible(false);
+        jap.setDisable(true);
+
+        japa.setVisible(false);
+        japa.setDisable(true);
+
+        japan.setVisible(false);
+        japan.setDisable(true);
 
 
     }

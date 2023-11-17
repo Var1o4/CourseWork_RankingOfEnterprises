@@ -45,6 +45,25 @@ public class AdminMenuChoise extends BaseController{
             }
         });
 
+
+        admine.setOnAction(event->{
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo4/admin_menu.fxml"));
+                Parent root = fxmlLoader.load();
+                Scene newScene = new Scene(root);
+
+                AdminMenu adminMenu = fxmlLoader.getController();
+                adminMenu.setUserId(getUserId());
+                adminMenu.setSocket(getSocket());
+                adminMenu.setRole(getRole());
+
+                Stage primaryStage = (Stage) admine.getScene().getWindow();
+                primaryStage.setScene(newScene);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
     }
 
 }
