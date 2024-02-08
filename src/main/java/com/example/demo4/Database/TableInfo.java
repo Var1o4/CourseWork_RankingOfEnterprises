@@ -267,4 +267,16 @@ public class TableInfo {
 
         return tableInfo;
     }
+
+
+    public void ziro() {
+        this.roeTableId = 0;
+        this.cbTableId = 0;
+        this.equityTableId = 0;
+        this.coverateTableId = 0;
+        this.dpoTableId = 0;
+        this.dpocTableId = 0;
+        this.companyTableId = 0;
+        this.created = false; // или установите значение по умолчанию для типа данных поля
+    }
 }

@@ -24,8 +24,6 @@ import com.example.demo4.Server.ClientApp;
 import javafx.stage.Stage;
 
 public class WorkUserController extends BaseController {
-
-
     boolean roe = false;
     boolean equity = false;
 
@@ -184,7 +182,10 @@ public class WorkUserController extends BaseController {
                     Parent root = loader.load();
                     ResultController resultController = loader.getController();
                     resultController.initial(roe, coverate, equity, dpo, dpoc, cb, company, res);
+
                     resultController.setSocket(getSocket());
+                    resultController.setUserId(getUserId());
+                    resultController.setRole(getRole());
                     bp.setCenter(root);
                 } catch (IOException e) {
                     throw new RuntimeException(e);

@@ -7,8 +7,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.text.Text;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class ResultController extends BaseController{
     private double roe_1, coverate_1, equity_1, dpo_1, dpoc_1, cb_1;
@@ -71,10 +75,21 @@ public class ResultController extends BaseController{
             try {
                 PrintWriter out = new PrintWriter(getSocket().getOutputStream(), true);
                 out.println("new_company_write");
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo4/work_user_module.fxml"));
+                    Parent root = fxmlLoader.load();
+                    Scene newScene = new Scene(root);
 
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+                    WorkUserController workUserController = fxmlLoader.getController();
+                    workUserController.setUserId(getUserId());
+                    workUserController.setSocket(getSocket());
+                    workUserController.setRole(getRole());
+                    workUserController.initialize();
+
+                    Stage primaryStage = (Stage) new_company.getScene().getWindow();
+                    primaryStage.setScene(newScene);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
 
 
         });

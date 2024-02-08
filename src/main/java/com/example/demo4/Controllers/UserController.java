@@ -184,6 +184,8 @@ public class UserController extends BaseController{
     }
     @FXML
     void initialize() {
+
+
         show_x.setOnAction(event -> {
 
 

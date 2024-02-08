@@ -36,15 +36,35 @@
                         <Font size="3.0" />
                     </font>
                 </Text>
-                <Button mnemonicParsing="false" onMouseClicked="#bacccccc" prefHeight="25.0" prefWidth="158.0" style="-fx-background-color: none; -fx-border-color: orange; -fx-border-width: 3px; -fx-border-radius: 10px;" text="&lt;- Назад">
-                    <font>
-                        <Font name="Segoe Print" size="10.0" />
-                    </font></Button>
+            <Button mnemonicParsing="false" onMouseClicked="#dora" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: none; -fx-border-color: orange; -fx-border-width: 3px; -fx-border-radius: 10px;" text="Лучшие компании">
+               <font>
+                  <Font name="Segoe Print" size="13.0" />
+               </font>
+            </Button>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="4.0">
                     <font>
                         <Font size="3.0" />
                     </font>
                 </Text>
+            <Button mnemonicParsing="false" onMouseClicked="#dora_dura" prefHeight="45.0" prefWidth="165.0" style="-fx-background-color: none; -fx-border-color: orange; -fx-border-width: 3px; -fx-border-radius: 10px;" text="График пользователей">
+               <font>
+                  <Font name="Segoe Print" size="10.0" />
+               </font>
+            </Button>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="4.0">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Text>
+                <Button mnemonicParsing="false" onMouseClicked="#bacccccc" prefHeight="25.0" prefWidth="158.0" style="-fx-background-color: none; -fx-border-color: orange; -fx-border-width: 3px; -fx-border-radius: 10px;" text="&lt;- Назад">
+                    <font>
+                        <Font name="Segoe Print" size="10.0" />
+                    </font></Button>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Text>
             </children>
         </VBox>
     </left>

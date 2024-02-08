@@ -23,11 +23,7 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="49fb3c2e-b473-45ec-98ef-52aeaaa81a24" object-ref="schemas/course_work_psp/tables/cb_rate" />
-      <object connection-id="49fb3c2e-b473-45ec-98ef-52aeaaa81a24" object-ref="schemas/course_work_psp/tables/company" />
-      <object connection-id="49fb3c2e-b473-45ec-98ef-52aeaaa81a24" object-ref="schemas/course_work_psp/tables/coverate_ratio" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="49fb3c2e-b473-45ec-98ef-52aeaaa81a24" dataset="course_work_psp.coverate_ratio" active-filter-id="" />
@@ -44,6 +40,9 @@
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
     <filters />
+  </component>
+  <component name="DBNavigator.Project.ParserDiagnosticsManager">
+    <diagnostics-history />
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>

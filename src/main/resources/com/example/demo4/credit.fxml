@@ -53,7 +53,7 @@
                 <Font name="Segoe Print" size="23.0" />
             </font>
         </Text>
-        <Text fx:id="companyDanger" fill="RED" layoutX="86.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-opacity: 0;" text="Введите название компании" wrappingWidth="228.13671875">
+        <Text fx:id="companyDanger" fill="RED" layoutX="86.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-opacity: 0;" text="Неккоректно введены числа" wrappingWidth="228.13671875">
             <font>
                 <Font size="17.0" />
             </font>

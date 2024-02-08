@@ -130,7 +130,7 @@ public class temp {
 
 
                                 if (elements[0].equals("new_company_write")) {
-                                    tableInfo=null;
+                                    tableInfo.ziro();
                                 }
 
 

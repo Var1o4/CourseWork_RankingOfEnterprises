@@ -57,7 +57,10 @@ public class EquityController extends BaseController{
                 StringBuilder stringBuilder = new StringBuilder();
 
                 // Проверка значения
-                if (Double.isFinite(equity1)&&Double.isFinite(equity_1)&&Double.isFinite(totalAsses1)&&Double.isFinite(totalAsses_1)) {
+                if (Double.isFinite(equity1) && equity1 != 0 &&
+                        Double.isFinite(equity_1) && equity_1 != 0 &&
+                        Double.isFinite(totalAsses1) && totalAsses1 != 0 &&
+                        Double.isFinite(totalAsses_1) && totalAsses_1 != 0) {
                     companyDanger1.setOpacity(0);
                     companyDanger.setOpacity(0);
 

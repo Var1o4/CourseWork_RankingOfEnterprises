@@ -10,11 +10,11 @@ public class SolveResult {
 
     public void roeSolve(double roe, double cb){
         double del= roe/cb;
-        if(del>((1/3)*cb)){
+        if(del>((1/3)*cb/100)){
             totalScore+=5;
-        }else if(((1/3)*cb)>=del && del>((1/4)*cb)){
+        }else if(((1/3)*cb/100)>=del && del>((1/4)*cb/100)){
             totalScore+=3;
-        }else if(((1/4)*cb)>=del && del>0){
+        }else if(((1/4)*cb/100)>=del && del>0){
             totalScore+=1;
         }
     }

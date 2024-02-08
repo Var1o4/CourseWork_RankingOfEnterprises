@@ -16,12 +16,6 @@ import java.net.SocketException;
 
 import com.example.demo4.Database.IdStorage;
 public class ClientApp extends Application implements RegistrationListener {
-
-
-
-
-
-
     private static final int DEFAULT_USER_ID = 0;
     private Socket socket;
     private PrintWriter out;

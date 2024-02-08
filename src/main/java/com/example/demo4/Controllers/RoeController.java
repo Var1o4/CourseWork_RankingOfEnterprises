@@ -70,18 +70,22 @@ public class RoeController extends BaseController {
                 StringBuilder stringBuilder = new StringBuilder();
 
                 // Проверка значения
-                if (Double.isFinite(net_profit_1)&&Double.isFinite(equity_1)&&Double.isFinite(nominal_rate_1)&&Double.isFinite(inflation_rate_1)&&comp_name!="") {
+                if (Double.isFinite(net_profit_1) && net_profit_1 != 0 &&
+                        Double.isFinite(equity_1) && equity_1 != 0 &&
+                        Double.isFinite(nominal_rate_1) && nominal_rate_1 != 0 &&
+                        Double.isFinite(inflation_rate_1) && inflation_rate_1 != 0 &&
+                        comp_name != "") {
                     companyDanger1.setOpacity(0);
                     companyDanger.setOpacity(0);
 
-                    double result = net_profit_1 / equity_1;
+                    double result = Math.log10(net_profit_1) / Math.log10(equity_1);
 
                     DecimalFormat decimalFormat = new DecimalFormat("#.###");
                     String formattedResult = decimalFormat.format(result);
 
                     roe.setText(formattedResult);
 
-                    double result_cb= nominal_rate_1-inflation_rate_1 ;
+                    double result_cb =  Math.pow((nominal_rate_1 - inflation_rate_1), 2) / Math.sqrt(2);
 
                     DecimalFormat decimalFormat_cb = new DecimalFormat("#.###");
                     String formattedResult_cb = decimalFormat.format(result_cb);

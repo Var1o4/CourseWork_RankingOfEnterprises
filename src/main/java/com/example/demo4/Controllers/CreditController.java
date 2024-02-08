@@ -60,7 +60,11 @@ public class CreditController extends BaseController{
                 StringBuilder stringBuilder = new StringBuilder();
 
                 // Проверка значения
-                if (Double.isFinite(kz_1)&&Double.isFinite(nkaz_1)&&Double.isFinite(net_prod_1)&&Double.isFinite(amount_prod_1)) {
+                if (Double.isFinite(kz_1) && kz_1 != 0 &&
+                        Double.isFinite(nkaz_1) && nkaz_1 != 0 &&
+                        Double.isFinite(net_prod_1) && net_prod_1 != 0 &&
+                        Double.isFinite(amount_prod_1) && amount_prod_1 != 0) {
+
                     companyDanger1.setOpacity(0);
                     companyDanger.setOpacity(0);
 
@@ -71,7 +75,7 @@ public class CreditController extends BaseController{
 
                     dpo.setText(formattedResult);
 
-                    double dpoc_1= (net_prod_1*365)/amount_prod_1 ;
+                    double dpoc_1= (net_prod_1+365)/amount_prod_1 ;
 
                     DecimalFormat decimalFormat_cb = new DecimalFormat("#.###");
                     String formattedResult_cb = decimalFormat.format(dpoc_1);
